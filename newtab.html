@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bento Homescreen</title>
+    <link rel="stylesheet" href="newtab.css" />
+  </head>
+  <body>
+    <div class="background-overlay" aria-hidden="true"></div>
+
+    <main class="page-shell">
+      <header class="topbar">
+        <h1 class="sections-title">Your sections</h1>
+
+        <form id="launcher-form" class="launcher-form" autocomplete="off">
+          <label class="sr-only" for="launcher-input">Open a URL, search, or app</label>
+          <input
+            id="launcher-input"
+            type="text"
+            placeholder="Search apps, type URL, or ask anything..."
+            spellcheck="false"
+          />
+          <ul id="suggestions" class="suggestions hidden" role="listbox" aria-label="App suggestions"></ul>
+        </form>
+
+        <div class="top-actions">
+          <button id="toggle-add-app" class="ghost-btn" type="button">Add app</button>
+          <button id="open-settings" class="ghost-btn" type="button">Edit styles</button>
+        </div>
+      </header>
+
+      <form id="add-app-form" class="add-app-form hidden" autocomplete="off">
+        <div class="form-grid">
+          <label>
+            Name
+            <input id="app-name" required placeholder="e.g. Notion" />
+          </label>
+          <label>
+            URL
+            <input id="app-url" required placeholder="https://notion.so" />
+          </label>
+          <label>
+            Section
+            <input id="app-section" placeholder="e.g. Work" />
+          </label>
+          <label>
+            Icon URL (optional)
+            <input id="app-icon" placeholder="https://.../icon.png" />
+          </label>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="primary-btn">Save app</button>
+          <button type="button" id="cancel-add-app" class="ghost-btn">Cancel</button>
+        </div>
+      </form>
+
+      <section id="sections-grid" class="sections-grid"></section>
+    </main>
+
+    <dialog id="settings-dialog" class="settings-dialog">
+      <form method="dialog" id="settings-form">
+        <div class="panel-title-row">
+          <h2>Visual settings</h2>
+          <button value="cancel" class="ghost-btn" type="submit">Close</button>
+        </div>
+
+        <div class="settings-grid">
+          <label>
+            Background type
+            <select id="bg-type">
+              <option value="gradient">Gradient</option>
+              <option value="image">Image URL</option>
+              <option value="solid">Solid color</option>
+            </select>
+          </label>
+          <label>
+            Background value
+            <input id="bg-value" placeholder="linear-gradient(...) or #111 or image URL" />
+          </label>
+          <label>
+            Container color
+            <input id="panel-color" type="color" />
+          </label>
+          <label>
+            Accent color
+            <input id="accent-color" type="color" />
+          </label>
+          <label>
+            Text color
+            <input id="text-color" type="color" />
+          </label>
+        </div>
+
+        <div class="form-actions">
+          <button id="save-settings" class="primary-btn" type="button">Save settings</button>
+          <button id="reset-settings" class="ghost-btn" type="button">Reset defaults</button>
+        </div>
+      </form>
+    </dialog>
+
+    <template id="section-template">
+      <article class="section" draggable="true">
+        <header class="section-header">
+          <h3 class="section-title"></h3>
+        </header>
+        <div class="apps-row"></div>
+      </article>
+    </template>
+
+    <template id="app-card-template">
+      <article class="app-card">
+        <button class="app-delete" type="button" aria-label="Delete app">✕</button>
+        <button class="app-open" type="button">
+          <img class="app-icon" alt="" />
+          <span class="app-name"></span>
+        </button>
+      </article>
+    </template>
+
+    <script src="newtab.js"></script>
+  </body>
+</html>
